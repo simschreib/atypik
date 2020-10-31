@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import url('https://fonts.googleapis.com/css2?family=Atma&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-green);
+$my-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+
+@include angular-material-theme($my-app-theme);
+
+h1{
+  font-family: 'Atma', cursive;
+}
+h2{
+  font-family: 'Nunito', sans-serif;
+}
+
+button{
+    border: none;
+    outline: none;
+}
+
+.mat-sidenav-container{
+  height: fit-content!important;
+  min-height: fit-content!important;
+}
+
+
+.mat-form-field-should-float label{
+      transform: translateY(-0.59375em) scale(0.75)!important;
+}

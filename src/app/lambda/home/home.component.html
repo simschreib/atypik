@@ -1,0 +1,93 @@
+<ng-container *ngFor="let home of homes">
+  <div class="">
+    {{ home.libelle }}
+    {{ home.type}}
+  </div>
+</ng-container>
+
+
+<div class="wrapper">
+  <div class="search-container">
+    <div class="background-effect">
+      <div class="first-card">
+        <div class="title">
+          <h1> Atyik House</h1>
+          <h2>Location de Logements Insolites</h2>
+        </div>
+        <form [formGroup]="search" class="search" submit="console.log('ok')">
+            <mat-form-field appearance="fill" class="col-xs-3 col-md-3 col-sm-12">
+              <mat-label>Catégories</mat-label>
+              <mat-select multiple formControlName="category" required>
+                <mat-option *ngFor="let category of categories" [value]="category.value">
+                  {{category.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-xs-3 col-md-3 col-sm-12">
+              <mat-label>Début du séjour</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="start" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-xs-3 col-md-3 col-sm-12">
+              <mat-label>Fin du Séjour</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="end" required>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <div class="col-12">
+              <button  type="submit" name="button" class="submit" >
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="idea-container">
+      <div class="background-effect">
+
+        <div class="title">
+          <h2>Nos Idées Week End Insolite</h2>
+
+        </div>
+        <div class="list-idea">
+          <div class="card-idea col-xl-6 col-sm-12 col-md-6">
+            <div class="idea idea-1">
+              <a href="#"> Proche de Paris</a>
+            </div>
+          </div>
+          <div class="card-idea col-xl-6 col-sm-12 col-md-6">
+            <div class="idea idea-2">
+              <a href="#"> Séjour à la campagne</a>
+            </div>
+          </div>
+          <div class="card-idea col-xl-6 col-sm-12 col-md-6">
+            <div class="idea idea-3">
+              <a href="#"> Séjour Spa et détente</a>
+            </div>
+          </div>
+          <div class="card-idea col-xl-6 col-sm-12 col-md-6">
+            <div class="idea idea-4">
+              <a href="#">Séjour en Bretagne</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="categories-container">
+      <div class="title">
+        <h2>Les catégories de Logements Insolites</h2>
+      </div>
+      <div class="list-categories">
+        <a class="col-xl-3 col-sm-6 col-md-4" *ngFor="let category of categories" href = "search/{{category.value}}">
+          {{category.viewValue}}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

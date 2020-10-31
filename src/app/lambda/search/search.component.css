@@ -1,0 +1,149 @@
+carousel{
+  width: calc(100% - 120px);
+  margin: auto;
+}
+.row{
+  margin: 0!important;
+}
+::ng-deep .mat-card-content{
+  max-width: 300px;
+  width: 100%;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.mat-card a.details{
+  width: 175px;
+  margin: auto;
+  padding: 4px;
+  background: #4caf50;
+  color:  #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  margin-top: 25px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+  margin-bottom: 15px;
+}
+
+.mat-card{
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid #fcfcfc;
+}
+
+/* ::ng-deep .mat-form-field-underline{
+display: none;
+} */
+
+/* ::ng-deep .mat-form-field-flex{
+background: none;
+border: 1px solid black;
+border-radius: 25px;
+} */
+::ng-deep  .mat-form-field-flex {
+  background: none!important;
+  padding: .75em .75em 0 .75em!important;
+}
+
+::ng-deep  .mat-form-field-infix {
+  padding: 0.25em 0 0.75em 0!important;
+}
+
+::ng-deep form .mat-form-field-label{
+  top: 1.09375em;
+  margin-top: -0.5em;
+}
+
+form{
+  position: fixed;
+  width: inherit;
+  max-width: inherit;
+  background: #fff;
+  margin-top: 10px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+  height: 100vh;
+  border-radius: 5px;
+}
+
+button.submit
+{
+  width: 175px;
+  margin: auto;
+  padding: 10px;
+  background: #4caf50;
+  color:  #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  margin-top: 25px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+  outline: none;
+}
+
+::ng-deep .mat-card-header{
+  display: block!important;
+}
+
+::ng-deep .carousel-cells .carousel-cell, ::ng-deep .carousel-cells {
+  width: 100%!important;
+}
+
+@media screen and (max-width: 768px) {
+  form{
+    position:inherit;
+    height: fit-content;
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+  carousel{
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.carousel-container{
+  background: #282828;
+}
+::ng-deep .ngucarousel-items .item {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tile img{
+  height: 100%;
+  max-height: 500px;
+  width: 100%;
+}
+.tile{
+  width: 100%
+}
+
+.carousel-arrow{
+  margin-top: calc(-33% - 40px);
+  position: relative;
+  height: 80px;
+  width: 25px;
+  outline: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+.rightRs{
+  float: right;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.leftRs{
+  float: left;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

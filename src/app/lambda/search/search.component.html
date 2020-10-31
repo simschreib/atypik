@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="search-tools col-xl-3 col-md-4 col-sm-12">
+    <form class="col-xl-3 col-md-4 col-sm-12" [formGroup]="search" class="search" submit="console.log('ok')">
+      <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Catégories</mat-label>
+        <mat-select multiple formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Caractéristiques</mat-label>
+        <mat-select multiple formControlName="category">
+          <mat-option *ngFor="let feature of features" [value]="feature.value">
+            {{feature.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-12">
+        <mat-label class="numberPeopleLabel">Nombre de personnes</mat-label>
+        <input matInput type="number"  formControlName ="peopleNumber" (change) = checkThisNbPeople() min = "0" max ="20">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Début du séjour</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="start" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Fin du Séjour</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="end" required>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <div class="col-12">
+        <button  type="submit" name="button" class="submit" >
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+    </form>
+  </div>
+  <div class="search-container col-xl-9 col-md-8 col-sm-12">
+    <div class="row justify-content-around"
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+    (scrolledUp)="onUp()">
+
+    <mat-card class="col-xl-5 col-md-11 col-sm-12" *ngFor="let hebergement of hebergements">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Cabane dans les arbres Petit singe</mat-card-title>
+        <mat-card-subtitle>65€/nuit</mat-card-subtitle>
+      </mat-card-header>
+      <div class="carousel-container">
+
+        <ngu-carousel #myCarousel [inputs]="carouselConfig" [dataSource]="carouselItems">
+          <div *nguCarouselDef="let item;" class="item">
+            <div class="tile">
+              <img src="./assets/img/{{item}}" alt="{{item}}">
+            </div>
+          </div>
+
+          <button NguCarouselNext class="rightRs carousel-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          <button NguCarouselPrev class="leftRs carousel-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+        </ngu-carousel>
+      </div>
+      <mat-card-content>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <a class="details" [routerLink]="['/house', hebergement]">Détails</a>
+        <!-- <a class="details" [routerLink]="['/house']" [queryParams]="{ hebergement: hebergement}">Détails</a> -->
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+</div>

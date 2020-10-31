@@ -1,0 +1,31 @@
+::ng-deep nav .mat-sidenav{
+  width: 100%;
+  max-width: 300px;
+}
+
+::ng-deep nav a.mat-button:hover{
+  color: #fff;
+}
+
+::ng-deep nav a.mat-button{
+  color: #282828;
+}
+
+::ng-deep nav .mat-toolbar{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: fixed;
+  z-index: 20;
+
+}
+
+::ng-deep .mat-sidenav-content, ::ng-deep .mat-drawer-inner-container{
+  margin-top: 64px;
+}
+
+nav .logo img{
+  height: 50px;
+}

@@ -1,0 +1,24 @@
+<ng-container *ngIf="type === 'button'">
+  <ng-container *ngIf="!currentUser">
+    <a class="nav-item nav-link"  mat-button routerLink="/">Home</a>
+    <a class="nav-item nav-link"  mat-button routerLink="/login">Login</a>
+    <a class="nav-item nav-link"  mat-button routerLink="/register">Register</a>
+  </ng-container>
+  <ng-container *ngIf="currentUser">
+    <a class="nav-item nav-link"  mat-button routerLink="/">Home</a>
+    <a class="nav-item nav-link"  mat-button (click)="logout()">Logout</a>
+  </ng-container>
+</ng-container>
+
+
+<ng-container *ngIf="type === 'list'">
+  <ng-container *ngIf="!currentUser">
+    <a class="nav-item nav-link"  mat-list-item routerLink="/">Home</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/login">Login</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/register">Register</a>
+  </ng-container>
+  <ng-container *ngIf="currentUser">
+    <a class="nav-item nav-link"  mat-list-item routerLink="/">Home</a>
+    <a class="nav-item nav-link"  mat-list-item (click)="logout()">Logout</a>
+  </ng-container>
+</ng-container>

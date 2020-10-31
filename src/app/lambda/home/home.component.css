@@ -1,0 +1,142 @@
+form.search{
+  align-items: center;
+}
+
+.search-container{
+  background: url("/assets/img/hebergement-insolite.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+}
+
+.background-effect{
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first-card{
+  width: 80%;
+  padding: 20px;
+  border-radius: 50px;
+  margin: auto;
+  background: #f1f1f1;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+  border: 2px solid #4caf50;
+  opacity: 0.85;
+}
+
+.search-container .title, .categories-container .title, .idea-container .title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.idea-container .title {
+  padding-top: 50px;
+  color: #fff;
+}
+.search-container .title h2{
+  font-size: 1.2em;
+}
+.categories-container, .idea-container{
+  margin-top: 100px;
+}
+.idea-container{
+  background: url("/assets/img/wood_texture.jpg");
+  background-size: cover;
+}
+.list-categories, .list-idea{
+
+}
+.list-categories a{
+  color: #fff;
+  background-color: #4caf50;
+  display: inline-block;
+  text-decoration: none;
+  border: 2px solid;
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.list-categories a:hover{
+  background-color: #2f5a30;
+  transition: all 0.3s ease;
+}
+
+.list-idea .idea{
+  width: 100%
+}
+.list-idea a{
+  color: #fff;
+  background-color: #080808;
+  opacity: 0.8;
+  font-family: "Atma", cursive;
+  display: inline-block;
+  text-decoration: none;
+  height: 300px;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding-top: 100px;
+  font-size: 22px;
+}
+
+.list-idea a:hover{
+  background-color: #000;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+.card-idea{
+  display: inline-block;
+}
+
+.idea{
+  background-size: cover!important;
+  background-repeat: no-repeat!important;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  background-position: 50% 50%!important;
+}
+.idea-1{
+  background: url("/assets/img/paris.jpg");
+}
+.idea-2{
+  background: url("/assets/img/campagne.jpg");
+}
+.idea-3{
+  background: url("/assets/img/spa.jpg");
+}
+.idea-4{
+  background: url("/assets/img/bretagne.jpeg");
+}
+
+button.submit
+{
+  width: 175px;
+  margin: auto;
+  padding: 10px;
+  background: #4caf50;
+  color:  #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  margin-top: 25px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+  outline: none;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex{
+  background: none;
+}
+@media screen and (max-width: 640px) {
+  .search-container h2{
+    font-size: 1.5em;
+  }
+}
