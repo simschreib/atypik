@@ -72,6 +72,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import {CarouselModule} from "ngx-carousel-lib";
 import { NguCarouselModule } from '@ngu/carousel';
 
+//google map
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -121,6 +123,10 @@ import { NguCarouselModule } from '@ngu/carousel';
     IvyCarouselModule,
     CarouselModule,
     NguCarouselModule,
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCpp11S-8K5FBH987cU9LagQo8OFWGF5Cw'
+    }),
   ],
   declarations: [
     AppComponent,

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
+    
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         }
         else{
-          console.log("no no ")
 
           this.alertService.error('error');
           this.loading = false;

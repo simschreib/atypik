@@ -1,4 +1,4 @@
-<div class="carousel-container">
+<div class="carousel-container-img">
   <ngu-carousel #myCarousel [inputs]="carouselConfig" [dataSource]="carouselItems">
     <div *nguCarouselDef="let item;" class="item">
       <div class="tile">
@@ -42,3 +42,69 @@
     </button>
   </div>
 </form>
+
+<div class="row">
+
+  <div class="caracteristiques col-lg-5 col-md-5 col-sm-12 mx-auto" *ngIf="caracteristiques != null && caracteristiques.length > 0">
+    <div class="title_info">
+      <h3> Caratéristiques du Logement</h3>
+    </div>
+    <div class="content">
+      <div class ="carac" *ngFor = "let carac of caracteristiques">
+        {{carac}}
+      </div>
+    </div>
+  </div>
+
+  <div class="infos col-lg-5 col-md-5 col-sm-12 mx-auto" *ngIf="infos != null && infos.length > 0">
+    <div class="title_info">
+      <h3>Infos Pratiques</h3>
+    </div>
+    <div class="content">
+      <div class ="info" *ngFor = "let info of infos">
+        {{info}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="activities col-lg-5 col-md-5 col-sm-12 mx-auto" *ngIf="activities != null && activities.length > 0">
+    <div class="title_info">
+      <h3>Activitées à Proximité</h3>
+    </div>
+    <div class="content">
+      <div class ="activity" *ngFor = "let activity of activities">
+        {{activity}}
+      </div>
+    </div>
+  </div>
+  <div class=" emplacement col-lg-5 col-md-5 col-sm-12 mx-auto">
+    <div class="title_info">
+      <h3>Emplacement</h3>
+    </div>
+    <div class="content">
+      <agm-map [latitude]="lat" [longitude]="lng" class="google-map"></agm-map>
+    </div>
+  </div>
+  <div class="comments container">
+    <div class="carousel-container-comments">
+      <ngu-carousel #myCarouselItems [inputs]="carouselConfigComment" [dataSource]="carouselComments">
+        <div *nguCarouselDef="let item;" class="item">
+          <div class="tile">
+            <h4>  {{item.author}}</h4>
+            <p>{{item.content}}</p>
+            <div class="rate-container">
+              <ng-container *ngFor="let number of [1,2,3,4,5]" >
+                <mat-icon fontSet="material-icons-outline" class="rate" *ngIf =" number > item.stars"> grade</mat-icon>
+                <mat-icon class="rate" *ngIf =" number <= item.stars"> grade</mat-icon>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <button NguCarouselNext class="rightRs carousel-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        <button NguCarouselPrev class="leftRs carousel-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      </ngu-carousel>
+    </div>
+  </div>

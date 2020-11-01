@@ -38,11 +38,11 @@ carousel{
 display: none;
 } */
 
-/* ::ng-deep .mat-form-field-flex{
-background: none;
-border: 1px solid black;
-border-radius: 25px;
-} */
+::ng-deep .mat-form-field{
+  max-width: 300px;
+  display: block;
+  margin: auto;
+}
 ::ng-deep  .mat-form-field-flex {
   background: none!important;
   padding: .75em .75em 0 .75em!important;

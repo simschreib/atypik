@@ -3,6 +3,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+import { PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-house',
   templateUrl: './house.component.html',
@@ -26,10 +29,47 @@ export class HouseComponent implements OnInit {
     'spa.jpg',
   ];
 
+  carouselConfigComment: NguCarouselConfig = {
+    grid: { xs: 1, sm: 1, md: 2, lg: 2, all: 0 },
+    load: 5,
+    loop: true,
+    touch: true,
+    velocity: 0.2
+  }
+  carouselComments = [
+    { author:"J. Doe", content : 'topissime  hebergement génial', stars : 5 },
+    { author:"J. Doe", content : 'topissime  hebergement génial',  stars : 3 },
+    { author:"J. Doe", content : 'topissime  hebergement génial', stars : 4 }
+  ];
+
+  infos = [
+    'Draps Non Fourni',
+    'Petit déjeuné inclus',
+    'Arrivée : 15h',
+    'Départ : 12h',
+  ]
+
+  caracteristiques = [
+    "Hauteur : 20 metre",
+    "Wifi",
+    "Toilette Sèche",
+    "Electricité"
+  ]
+
+  activities = [
+    'Excursion Equestre',
+    'Balade en vélo',
+  ]
+
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
   constructor(
     private route: ActivatedRoute,
   )
   {
+    (window as any).global = window;
+
     this.search = new FormGroup({
 
       start: new FormControl(),
@@ -40,7 +80,7 @@ export class HouseComponent implements OnInit {
     // this.route.queryParams.subscribe(params => {
     //   this.hebergement = params['hebergement'];
     // });
-   this.hebergement = this.route.snapshot.paramMap.get('id');
+    this.hebergement = this.route.snapshot.paramMap.get('id');
 
   }
   checkThisNbPeople(){
@@ -54,6 +94,6 @@ export class HouseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    window.scroll(0, 0);
   }
 }

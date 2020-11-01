@@ -33,30 +33,34 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] }, children:[
     { path: 'parameters', component: ModifyParametersComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin]}},
+    { path: '', component: ModifyParametersComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin]}},
     { path: 'users', component: ModifyUserComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin]}},
     { path: 'houses', component: ModifyHouseComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin]}},
-    
+
   ]},
 
   { path: 'landlord', component: LandlordComponent, canActivate: [AuthGuard], data: { roles: [Role.Landlord] }, children:[
     { path: 'modify', component: LandlordModifyHouseComponent, canActivate: [AuthGuard], data: { roles: [Role.Landlord]}},
     { path: 'profil', component: LandlordModifyProfilComponent, canActivate: [AuthGuard], data: { roles: [Role.Landlord]}},
+    { path: '', component: LandlordModifyProfilComponent, canActivate: [AuthGuard], data: { roles: [Role.Landlord]}},
     { path: 'reservations', component: LandlordManageReservationComponent, canActivate: [AuthGuard], data: { roles: [Role.Landlord]}},
   ]},
 
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }, children:[
     { path: 'reserve', component: UserReserveComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }},
     { path: 'profil', component: UserProfilComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }},
+    { path: '', component: UserProfilComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }},
     { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }},
   ]},
 
-  { path: '', component: HomeComponent},
-  { path: 'search', component: SearchComponent},
-  { path: 'house/:id', component: HouseComponent},
+  { path: '', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ["USER"] }},
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard], data: { roles: ["USER"] }},
+  { path: 'house/:id', component: HouseComponent, canActivate: [AuthGuard], data: { roles: ["USER"] }},
 
   { path: '**', redirectTo: '' },
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
+    initialNavigation: 'enabled',
+    scrollPositionRestoration: 'enabled'
 });
