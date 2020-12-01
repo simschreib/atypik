@@ -155,6 +155,9 @@ export class SearchComponent implements OnInit {
     private title: Title,
     private meta : Meta,
   ) {
+    this.homeService.home().subscribe(homes => {this.homes = homes
+    console.log(this.homes);
+    });
     this.title.setTitle('Atypique House - Logement Insolite - Recherche');
     this.meta.updateTag(
       { name: 'description', content: 'Page de recherche de logement  Atypik House - Location de logements atypique et insolite en France' }

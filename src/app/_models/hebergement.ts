@@ -5,15 +5,15 @@ import { User } from './user';
 
 export class Hebergement {
 
-  private id: string;
-  private name: string;
-	private notation: number;
-	private price: number;
-	private rooms: number;
-	private capacity: number;
-	private position: number;
-	private type: Type;
-	private comments: Commentaire[];
-	private owner: User;
-	private reservations: Reservation[];
+  id: string;
+  name: string;
+	notation: number;
+	price: number;
+	rooms: number;
+	capacity: number;
+	position: number;
+	type: Type;
+	comments: Commentaire[];
+	owner: User;
+	reservations: Reservation[];
 }

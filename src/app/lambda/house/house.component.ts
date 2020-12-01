@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from '@angular/common';
+import { CategoriesService, HomeService } from 'src/app/_services';
+import { Hebergement } from 'src/app/_models/hebergement';
 
 @Component({
   selector: 'app-house',
@@ -16,6 +18,7 @@ export class HouseComponent implements OnInit {
   maxDate: Date;
   dates;
   hebergement;
+  house: Hebergement;
   search: FormGroup;
   maxPeople = 2;
   carouselConfig: NguCarouselConfig = {
@@ -67,9 +70,11 @@ export class HouseComponent implements OnInit {
   lng: number = 7.809007;
 
   constructor(
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, private homeService: HomeService, private categoriesService: CategoriesService
   )
   {
+    this.hebergement = this.route.snapshot.paramMap.get('id');
+    this.homeService.oneHome(this.hebergement).subscribe(home => this.house = home);
 
     this.search = new FormGroup({
 
@@ -81,7 +86,7 @@ export class HouseComponent implements OnInit {
     // this.route.queryParams.subscribe(params => {
     //   this.hebergement = params['hebergement'];
     // });
-    this.hebergement = this.route.snapshot.paramMap.get('id');
+    
 
     const year = new Date().getFullYear();
     const day = new Date().getDay();

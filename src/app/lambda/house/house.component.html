@@ -12,15 +12,15 @@
 </div>
 
 <div class="title">
-  <h1> LA cabane Du singe</h1>
-  <h2> 55€/nuit</h2>
+  <h1>{{house.name}}</h1>
+  <h2> {{house.price}}€/nuit</h2>
 </div>
 
 <form [formGroup]="search" class="search" submit="console.log('ok')">
 
   <mat-form-field class="col-xs-3 col-md-3 col-sm-12">
     <mat-label class="numberPeopleLabel">Nombre de personnes</mat-label>
-    <input matInput type="number"  formControlName ="peopleNumber" (change) = checkThisNbPeople() min = "0" max ="20">
+    <input matInput type="number"  formControlName ="peopleNumber" (change) = checkThisNbPeople() min = "0" max ="{{house.capacity}}">
   </mat-form-field>
 
   <mat-form-field>

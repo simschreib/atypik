@@ -60,11 +60,11 @@
     (scrolled)="onScrollDown()"
     (scrolledUp)="onUp()">
 
-    <mat-card class="col-xl-5 col-md-11 col-sm-12" *ngFor="let hebergement of hebergements">
+    <mat-card class="col-xl-5 col-md-11 col-sm-12" *ngFor="let hebergement of homes">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Cabane dans les arbres Petit singe</mat-card-title>
-        <mat-card-subtitle>65€/nuit</mat-card-subtitle>
+        <mat-card-title>{{hebergement.name}} ID = {{hebergement.id}}</mat-card-title>
+        <mat-card-subtitle>{{hebergement.price}}€/nuit</mat-card-subtitle>
       </mat-card-header>
       <div class="carousel-container">
 
@@ -90,7 +90,7 @@
         <mat-icon class="rate" fontSet="material-icons-outlined"> grade</mat-icon>
       </div>
       <mat-card-actions>
-        <a class="details" [routerLink]="['/house', hebergement]">Détails</a>
+        <a class="details" [routerLink]="['/house', hebergement.id]">Détails</a>
         <!-- <a class="details" [routerLink]="['/house']" [queryParams]="{ hebergement: hebergement}">Détails</a> -->
       </mat-card-actions>
     </mat-card>

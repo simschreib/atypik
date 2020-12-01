@@ -22,4 +22,8 @@ export class HomeService {
     return this.http.get<Hebergement[]>(this.variablesGlobales.config.apiUrl + "/home/allHomes");
   }
 
+  oneHome(id: string): Observable<Hebergement> {
+    return this.http.get<Hebergement>(this.variablesGlobales.config.apiUrl + "/home/" + id);
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService, CategoriesService } from "src/app/_services";
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
