@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CaracteristiquesService {
+export class CaracteristiqueService {
 
   constructor(
     private http: HttpClient,
@@ -16,8 +16,8 @@ export class CaracteristiquesService {
   ) { }
 
 
-  caracteristiques(): Observable<Type[]> {
-    return this.http.get<Caracteristiques[]>(this.variablesGlobales.config.apiUrl + "/caracteristiques");
+  caracteristiques(): Observable<Caracteristique[]> {
+    return this.http.get<Caracteristique[]>(this.variablesGlobales.config.apiUrl + "/caracteristiques");
   }
 
 }

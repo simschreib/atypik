@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { Hebergement } from 'src/app/_models/hebergement';
-import { HomeService, CategoriesService, CaracteristiquesService } from 'src/app/_services';
+import { HomeService, CategoriesService, CaracteristiqueService } from 'src/app/_services';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
@@ -150,7 +150,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private homeService: HomeService,
     private categoriesService: CategoriesService,
-    private caracteristiquesService : CaracteristiquesService,
+    private caracteristiquesService : CaracteristiqueService,
     private route: ActivatedRoute,
     private title: Title,
     private meta : Meta,
