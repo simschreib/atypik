@@ -6,7 +6,8 @@ export class Reservation {
     id: string;
     libelle: string;
     prix: number;
-    calendrier: Date;
+    dateDebut: Date;
+    dateFin: Date;
     hebergement: Hebergement;
     client: User;
 }
