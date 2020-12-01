@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Home } from 'src/models/home';
+import { Hebergement } from 'src/app/_models/hebergement';
 import { HomeService } from "src/services/home.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { HomeService } from "src/services/home.service";
 })
 export class HomesComponent implements OnInit {
 
-  public homes: Home[];
+  public homes: Hebergement[];
 
   constructor(private homeService: HomeService) { }
 

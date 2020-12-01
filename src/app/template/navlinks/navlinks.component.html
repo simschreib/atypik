@@ -1,24 +1,52 @@
 <ng-container *ngIf="type === 'button'">
   <ng-container *ngIf="!currentUser">
-    <a class="nav-item nav-link"  mat-button routerLink="/">Home</a>
-    <a class="nav-item nav-link"  mat-button routerLink="/login">Login</a>
-    <a class="nav-item nav-link"  mat-button routerLink="/register">Register</a>
+    <a class="nav-item nav-link"  mat-button routerLink="/">Accueil</a>
+    <a class="nav-item nav-link"  mat-button routerLink="/login">Se connecter</a>
+    <a class="nav-item nav-link"  mat-button routerLink="/register">S'inscrire</a>
   </ng-container>
   <ng-container *ngIf="currentUser">
-    <a class="nav-item nav-link"  mat-button routerLink="/">Home</a>
-    <a class="nav-item nav-link"  mat-button (click)="logout()">Logout</a>
+    <ng-container *ngIf="currentUser.role == Role.Admin">
+      <a class="nav-item nav-link" mat-button routerLink="/admin/houses">Hébergement</a>
+      <a class="nav-item nav-link" mat-button routerLink="/admin/users">Utilisateurs</a>
+      <a class="nav-item nav-link"  mat-button (click)="logout()">Logout</a>
+    </ng-container>
+    <ng-container *ngIf="currentUser.role == Role.Landlord">
+      <a class="nav-item nav-link"  mat-button routerLink="/profil">Mon profil</a>
+      <a class="nav-item nav-link"  mat-button routerLink="/hebergement">Mes Hébergement</a>
+      <a class="nav-item nav-link"  mat-button routerLink="/reservations">Mes Réservations</a>
+      <a class="nav-item nav-link"  mat-button (click)="logout()">se déconnecter</a>
+    </ng-container>
+    <ng-container *ngIf="currentUser.role == Role.User">
+      <a class="nav-item nav-link"  mat-button routerLink="/profil">Mon profil</a>
+      <a class="nav-item nav-link"  mat-button routerLink="/reservations">Mes Réservations</a>
+      <a class="nav-item nav-link"  mat-button (click)="logout()">se déconnecter</a>
+    </ng-container>
   </ng-container>
 </ng-container>
 
 
 <ng-container *ngIf="type === 'list'">
   <ng-container *ngIf="!currentUser">
-    <a class="nav-item nav-link"  mat-list-item routerLink="/">Home</a>
-    <a class="nav-item nav-link"  mat-list-item routerLink="/login">Login</a>
-    <a class="nav-item nav-link"  mat-list-item routerLink="/register">Register</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/">Accueil</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/login">Se connecter</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/register">S'inscrire</a>
   </ng-container>
   <ng-container *ngIf="currentUser">
-    <a class="nav-item nav-link"  mat-list-item routerLink="/">Home</a>
+  <ng-container *ngIf="currentUser.role == Role.Admin ">
+    <a class="nav-item nav-link"  mat-list-item routerLink="/houses">Hébergement</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/users">Utilisateurs</a>
+    <a class="nav-item nav-link"  mat-list-item (click)="logout()">se déconnecter</a>
+  </ng-container>
+  <ng-container *ngIf="currentUser.role == Role.Landlord">
+    <a class="nav-item nav-link"  mat-list-item routerLink="/profil">Mon profil</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/hebergement">Mes Hébergement</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/reservations">Mes Réservations</a>
+    <a class="nav-item nav-link"  mat-list-item (click)="logout()">se déconnecter</a>
+  </ng-container>
+  <ng-container *ngIf="currentUser.role == Role.User">
+    <a class="nav-item nav-link"  mat-list-item routerLink="/profil">Mon profil</a>
+    <a class="nav-item nav-link"  mat-list-item routerLink="/reservations">Mes Réservations</a>
     <a class="nav-item nav-link"  mat-list-item (click)="logout()">Logout</a>
   </ng-container>
+</ng-container>
 </ng-container>

@@ -1,6 +1,6 @@
 <!-- nav -->
 <nav style="height: 100vh;">
-  <mat-toolbar color="primary">
+  <mat-toolbar>
     <mat-toolbar-row>
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" class="d-block d-lg-none">
         <mat-icon>menu</mat-icon>
@@ -19,16 +19,13 @@
   <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <app-navlinks [type] = "'list'"></app-navlinks>
+        <app-navlinks (click)="sidenav.toggle()" [type] = "'list'"></app-navlinks>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
-
       <router-outlet></router-outlet>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
-
 </nav>
 
 <!-- main app container -->

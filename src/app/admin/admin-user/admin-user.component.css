@@ -1,0 +1,23 @@
+table{
+  width: 100%!important;
+}
+
+.refresh{
+  border-radius: 30px;
+  margin-left:  15px;
+}
+
+::ng-deep select.mat-input-element{
+  padding-top: 1.5em!important;
+  font-size: 14px;
+}
+
+::ng-deep input.mat-input-element{
+  padding-top: 1em!important;
+  font-size: 14px;
+}
+
+::ng-deep input.mat-input-element + span > label{
+  font-size: 12px!important;
+  transform: scale(1) translateY(0px)!important;
+}

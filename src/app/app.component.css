@@ -13,19 +13,16 @@
 
 ::ng-deep nav .mat-toolbar{
   display: flex;
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
-  position: fixed;
-  z-index: 20;
-
-}
-
-::ng-deep .mat-sidenav-content, ::ng-deep .mat-drawer-inner-container{
-  margin-top: 64px;
 }
 
 nav .logo img{
   height: 50px;
+}
+
+::ng-deep nav .mat-toolbar.mat-primary {
+    background: #fff!important;
 }

@@ -4,23 +4,24 @@
   width: 100%;
 }
 .carousel-container-img .carousel-arrow{
-  margin-top: calc(-33% - 40px);
-  position: relative;
+  position: absolute;
   height: 80px;
   width: 25px;
   outline: none;
   display: flex;
   justify-content: space-around;
+  z-index: 1000;
   align-items: center;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
 .rightRs{
+  right: 0px;
   float: right;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 .leftRs{
-  float: left;
+  left : 0px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -154,4 +155,9 @@ button.submit
 }
 .row{
   margin: 0px!important;
+}
+
+::ng-deep .carousel-container-img .ngucarousel {
+    display: flex;
+    align-items: center;
 }

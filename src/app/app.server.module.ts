@@ -3,16 +3,17 @@ import { ServerModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
+import { CookieBackendModule } from 'ngx-cookie-backend';
 
 
-global['localStorage'] = localStorage;
 
-import 'localstorage-polyfill';
+
 
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
+    CookieBackendModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

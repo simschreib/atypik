@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Home } from 'src/models/home';
+import { Hebergement } from 'src/app/_models/hebergement';
+import { VariablesGlobales } from '../variablesGlobales';
 import { Observable } from 'rxjs';
 
 
@@ -9,13 +10,16 @@ import { Observable } from 'rxjs';
 })
 export class HomeService {
 
-  public urlHome = "http://localhost:8080/main"
+  public urlHome = "http://localhost:8080"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private variablesGlobales : VariablesGlobales,
+  ) { }
 
 
-  home(): Observable<Home[]> {
-    return this.http.get<Home[]>(this.urlHome + "/homes");
+  home(): Observable<Hebergement[]> {
+    return this.http.get<Hebergement[]>(this.variablesGlobales.config.apiUrl + "/home/allHomes");
   }
 
 }

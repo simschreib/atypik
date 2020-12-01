@@ -12,7 +12,9 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./house.component.css']
 })
 export class HouseComponent implements OnInit {
-
+  minDate: Date;
+  maxDate: Date;
+  dates;
   hebergement;
   search: FormGroup;
   maxPeople = 2;
@@ -68,7 +70,6 @@ export class HouseComponent implements OnInit {
     private route: ActivatedRoute,
   )
   {
-    (window as any).global = window;
 
     this.search = new FormGroup({
 
@@ -82,6 +83,12 @@ export class HouseComponent implements OnInit {
     // });
     this.hebergement = this.route.snapshot.paramMap.get('id');
 
+    const year = new Date().getFullYear();
+    const day = new Date().getDay();
+    const month = new Date().getMonth();
+    this.minDate = new Date(year, month, day + 1);
+    this.maxDate = new Date(year + 1, month, day);
+
   }
   checkThisNbPeople(){
     var form = this.search.value
@@ -92,7 +99,9 @@ export class HouseComponent implements OnInit {
       this.search.patchValue({peopleNumber: 0});
     }
   }
+  onDateChange(e){
 
+  }
   ngOnInit() {
     window.scroll(0, 0);
   }

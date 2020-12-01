@@ -41,16 +41,29 @@ form.search{
 .search-container .title h2{
   font-size: 1.2em;
 }
-.categories-container, .idea-container{
+.categories-container, .idea-container, .desc-container{
   margin-top: 100px;
+}
+.desc-container p{
+  max-width: 650px;
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.desc-container h2{
+  width: 100%;
+  text-align: center;
 }
 .idea-container{
   background: url("/assets/img/wood_texture.jpg");
-  background-size: cover;
+  background-size: 100%;
 }
-.list-categories, .list-idea{
+.list-idea{
+  display: flex;
+  flex-wrap: wrap;
+}
 
-}
 .list-categories a{
   color: #fff;
   background-color: #4caf50;
@@ -70,21 +83,39 @@ form.search{
 }
 
 .list-idea .idea{
-  width: 100%
+  width: 100%;
+  border-radius: 50px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
 }
 .list-idea a{
   color: #fff;
   background-color: #080808;
   opacity: 0.8;
-  font-family: "Atma", cursive;
   display: inline-block;
   text-decoration: none;
   height: 300px;
   width: 100%;
   transition: all 0.3s ease;
+  border-radius: 50px;
+}
+
+.list-idea a span{
+
+  font-family: "Atma", cursive;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 25px;
   font-size: 22px;
+  display: block;
+}
+.list-idea a p{
+  font-family: "Nunito", sans serif;
+  padding-top: 10px;
+  font-size: 14px;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 250px;
+  width: 100%;
+  margin: auto;
 }
 
 .list-idea a:hover{
@@ -107,14 +138,42 @@ form.search{
   background: url("/assets/img/paris.jpg");
 }
 .idea-2{
-  background: url("/assets/img/campagne.jpg");
-}
-.idea-3{
-  background: url("/assets/img/spa.jpg");
-}
-.idea-4{
   background: url("/assets/img/bretagne.jpeg");
 }
+.idea-3{
+  background: url("/assets/img/auvergne.jpg");
+}
+.idea-4{
+  background: url("/assets/img/bourgogne.jpg");
+}
+.idea-5{
+  background: url("/assets/img/centre.jpg");
+}
+.idea-6{
+  background: url("/assets/img/corse.jpeg");
+}
+.idea-7{
+  background: url("/assets/img/grandest.jpg");
+}
+.idea-8{
+  background: url("/assets/img/haut.jpg");
+}
+.idea-9{
+  background: url("/assets/img/normandie.jpg");
+}
+.idea-10{
+  background: url("/assets/img/aquitaine.jpg");
+}
+.idea-11{
+  background: url("/assets/img/occitanie.png");
+}
+.idea-12{
+  background: url("/assets/img/loire.jpg");
+}
+.idea-13{
+  background: url("/assets/img/cotedazur.jpg");
+}
+
 
 button.submit
 {

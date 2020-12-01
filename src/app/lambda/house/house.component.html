@@ -23,18 +23,17 @@
     <input matInput type="number"  formControlName ="peopleNumber" (change) = checkThisNbPeople() min = "0" max ="20">
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="col-xs-3 col-md-3 col-sm-12">
-    <mat-label>Début du séjour</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="start" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="col-xs-3 col-md-3 col-sm-12">
-    <mat-label>Fin du Séjour</mat-label>
-    <input matInput [matDatepicker]="picker2" formControlName="end" required>
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
+  <mat-form-field>
+    <input matInput
+    [min]="minDate"
+    [max]="maxDate"
+    placeholder="Sélectionnez les Dates"
+    [satDatepicker]="picker"
+    (click)="picker.open()"
+    (dateInput)="onDateChange($event.value)"
+    [value]="dates">
+    <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+    <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
   </mat-form-field>
   <div class="col-12">
     <button  type="submit" name="button" class="submit" >
@@ -89,22 +88,22 @@
   </div>
   <div class="comments container">
     <div class="carousel-container-comments">
-      <ngu-carousel #myCarouselItems [inputs]="carouselConfigComment" [dataSource]="carouselComments">
+      <ngu-carousel #myCarouselItems [inputs]="carouselConfigComment" [dataSource]="carouselComments" class="carousel">
         <div *nguCarouselDef="let item;" class="item">
           <div class="tile">
             <h4>  {{item.author}}</h4>
             <p>{{item.content}}</p>
             <div class="rate-container">
               <ng-container *ngFor="let number of [1,2,3,4,5]" >
-                <mat-icon fontSet="material-icons-outline" class="rate" *ngIf =" number > item.stars"> grade</mat-icon>
+                <mat-icon fontSet="material-icons-outlined" class="rate" *ngIf =" number > item.stars"> grade</mat-icon>
                 <mat-icon class="rate" *ngIf =" number <= item.stars"> grade</mat-icon>
               </ng-container>
             </div>
           </div>
         </div>
-
         <button NguCarouselNext class="rightRs carousel-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
         <button NguCarouselPrev class="leftRs carousel-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+
       </ngu-carousel>
     </div>
   </div>

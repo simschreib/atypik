@@ -7,6 +7,15 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { renderModuleFactory } from "@angular/platform-server";
+
+const domino = require('domino');
+const fs = require('fs');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '.', '../browser', 'index.html')).toString();
+const win = domino.createWindow(template);
+global['window'] = win;
+global['document'] = win.document;
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -31,7 +40,15 @@ export function app() {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(indexHtml, {
+      req,
+      res,
+      providers: [
+        {provide: APP_BASE_HREF, useValue: req.baseUrl},
+        {provide: 'REQUEST', useValue: req},
+        {provide: 'RESPONSE', useValue: res}
+      ]
+    });
   });
 
   return server;

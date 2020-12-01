@@ -1,0 +1,58 @@
+
+<div class="modify-house">
+  <div class="row mt-5">
+    <div class="col-lg-8 col-sm-12 mx-auto card">
+      <h5>Titre</h5>
+      <mat-form-field class="example-full-width">
+        <input matInput value="Sushi">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-8 col-sm-12 mx-auto card">
+      <h5>Description</h5>
+      <mat-form-field class="example-full-width">
+        <textarea matInput ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="mx-auto col-lg-5 col-sm-12 card">
+      <app-chips [label] = "'Info Pratiques'" (valueChange) = "changeInfo($event)" [data] = "infos" [all] = "infos"> </app-chips>
+    </div>
+    <div class="mx-auto col-lg-5 col-sm-12 card">
+      <app-chips [label] = "'Caractéristiques logement'" (valueChange) = "changeCarac($event)" [data] = "infos" [all] = "infos"> </app-chips>
+    </div>
+
+  </div>
+  <div class="row mt-5">
+    <div class="mx-auto col-lg-5 col-sm-12 card">
+      <app-chips [label] = "'Activités à proximité'" (valueChange) = "changeActivities($event)" [data] = "infos" [all] = "infos"> </app-chips>
+    </div>
+    <div class="mx-auto col-lg-5 col-sm-12 adress card">
+      <h5>Adresse</h5>
+      <mat-form-field>
+        <input matInput
+        matGoogleMapsAutocomplete
+        (onAutocompleteSelected)="onAutocompleteSelected($event)"
+        (onLocationSelected)="onLocationSelected($event)">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12 text-center">
+      <mat-slide-toggle
+      class="exaSmple-margin"
+      [checked]="checked"
+      (change)="toogle($event)">
+    </mat-slide-toggle>
+    <span *ngIf="checked" class="ml-4">
+      publié
+    </span>
+    <span *ngIf="!checked" class="ml-4">
+      en attente
+    </span>
+  </div>
+</div>
+</div>

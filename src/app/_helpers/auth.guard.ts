@@ -1,55 +1,64 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
+import { Injectable, Inject, PLATFORM_ID  } from '@angular/core';
+import { Router, CanActivate, CanLoad, ActivatedRoute ,ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../_services';
+import { VariablesGlobales } from '../variablesGlobales';
+import { delay } from 'rxjs/internal/operators';
+import { Observable, pipe } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators'
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
+  previousUrl: string;
+  currentUser: any;
+  try_count: number = 0;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private route: ActivatedRoute,
+    private variablesGlobales : VariablesGlobales,
+    private authenticationService: AuthenticationService,
+    @Inject(PLATFORM_ID) private platformId: Object
+
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-      //if (route.data.roles && route.data.roles.indexOf(decode(currentUser.token).role) === -1) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+      return this.authenticationService.currentUserObs().pipe( take(1), map(res => {
+        // console.log(res != null);
+        console.log(this.platformId);
 
-      if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
-        if(currentUser.role === 'OWNER'){
-          this.router.navigate(['/landlord']);
-          return false;
-        }
-
-        else if(currentUser.role === 'ADMIN'){
-          this.router.navigate(['/admin']);
-          return false;
-        }
-
-        else if(currentUser.role === 'GUEST' && route.data.roles.indexOf("USER") === -1){
-          this.router.navigate(['/user']);
-          return false;
-        }
-        else if(currentUser.role === 'GUEST' && route.data.roles.indexOf("USER") != -1 ){
-          return true;
+        const currentUser = this.authenticationService.currentUserValue;
+        if (currentUser) {
+          if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
+            if(currentUser.role === 'OWNER'){
+              this.router.navigate(['landlord']);
+              return false;
+            }
+            else if(currentUser.role === 'ADMIN'){
+              console.log("admin")
+              this.router.navigate(['admin']);
+              return false;
+            }
+            else if(currentUser.role === 'GUEST'){
+              this.router.navigate(['user']);
+              return false;
+            }
+            else{
+              this.router.navigate(['/']);
+              return false;
+            }
+            return false;
+          }
+          else{
+            return true;
+          }
         }
         else{
-          this.router.navigate(['/']);
+          this.router.navigate(['login']);
           return false;
         }
-      }
 
-      return true;
-    }
-    else if( route.data.roles.indexOf("USER") === -1) {
-      // not logged in so redirect to login page with the return url
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-      return false;
-    }
-
-    else{
-      return true;
-    }
+      })) 
 
   }
 }

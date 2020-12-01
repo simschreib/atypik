@@ -8,7 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 
 import { appRoutingModule } from './app-routing.module';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { ErrorInterceptor } from './_helpers';
+//import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './lambda/home/home.component';
@@ -17,8 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { AlertComponent } from './_components';
 import{ VariablesGlobales } from './variablesGlobales';
 import { ModifyParametersComponent } from './admin/modify-parameters/modify-parameters.component';
-import { ModifyUserComponent } from './admin/modify-user/modify-user.component';
-import { ModifyHouseComponent } from './admin/modify-house/modify-house.component';
+import { AdminUserComponent } from './admin/admin-user/admin-user.component';
+import { AdminHouseComponent } from './admin/admin-house/admin-house.component';
 import { LandlordModifyHouseComponent } from './landlord/landlord-modify-house/landlord-modify-house.component';
 import { LandlordModifyProfilComponent } from './landlord/landlord-modify-profil/landlord-modify-profil.component';
 import { LandlordManageReservationComponent } from './landlord/landlord-manage-reservation/landlord-manage-reservation.component';
@@ -66,6 +67,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 
 // carousel
 import {IvyCarouselModule} from 'angular-responsive-carousel';
@@ -74,6 +76,19 @@ import { NguCarouselModule } from '@ngu/carousel';
 
 //google map
 import { AgmCoreModule } from '@agm/core';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+
+
+import {AuthGuard} from './_helpers';
+import { ModifyHouseComponent } from './template/modify-house/modify-house.component';
+
+import { FormsModule } from '@angular/forms';
+import { ModifyUserComponent } from './template/modify-user/modify-user.component';
+import { ChipsComponent } from './template/chips/chips.component';
+
+import { FooterComponent } from './template/footer/footer.component';
+import { CguComponent } from './common/cgu/cgu.component';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   imports: [
@@ -119,14 +134,21 @@ import { AgmCoreModule } from '@agm/core';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    SatDatepickerModule,
+    SatNativeDateModule,
 
     IvyCarouselModule,
     CarouselModule,
     NguCarouselModule,
 
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCpp11S-8K5FBH987cU9LagQo8OFWGF5Cw'
+      apiKey: 'AIzaSyCpp11S-8K5FBH987cU9LagQo8OFWGF5Cw',
+      libraries: ['places']
     }),
+    MatGoogleMapsAutocompleteModule,
+    FormsModule,
+
+    CookieModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -135,8 +157,8 @@ import { AgmCoreModule } from '@agm/core';
     RegisterComponent,
     AlertComponent,
     ModifyParametersComponent,
-    ModifyUserComponent,
-    ModifyHouseComponent,
+    AdminUserComponent,
+    AdminHouseComponent,
     LandlordModifyHouseComponent,
     LandlordModifyProfilComponent,
     LandlordManageReservationComponent,
@@ -150,17 +172,26 @@ import { AgmCoreModule } from '@agm/core';
     LandlordComponent,
     LambdaComponent,
     NavlinksComponent,
+    ModifyHouseComponent,
+    ModifyUserComponent,
+    ChipsComponent,
+    FooterComponent,
+    CguComponent,
 
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     VariablesGlobales,
-
     // provider used to create fake backend
     // fakeBackendProvider
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModifyHouseComponent,
+    ModifyUserComponent,
+  ]
+
 })
 export class AppModule { };
