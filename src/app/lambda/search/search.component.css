@@ -5,7 +5,7 @@ carousel{
 .row{
   margin: 0!important;
 }
-::ng-deep .mat-card-content{
+::ng-deep .search .mat-card-content{
   max-width: 300px;
   width: 100%;
   margin: auto;
@@ -38,26 +38,26 @@ carousel{
 display: none;
 } */
 
-::ng-deep .mat-form-field{
+::ng-deep .search .mat-form-field{
   max-width: 300px;
   display: block;
   margin: auto;
 }
-::ng-deep  .mat-form-field-flex {
+::ng-deep  .search .mat-form-field-flex {
   background: none!important;
   padding: .75em .75em 0 .75em!important;
 }
 
-::ng-deep  .mat-form-field-infix {
+::ng-deep  .search .mat-form-field-infix {
   padding: 0.25em 0 0.75em 0!important;
 }
 
-::ng-deep form .mat-form-field-label{
+::ng-deep form .search .mat-form-field-label{
   top: 1.09375em;
   margin-top: -0.5em;
 }
 
-form{
+.search form{
   position: fixed;
   width: inherit;
   max-width: inherit;
@@ -68,7 +68,7 @@ form{
   border-radius: 5px;
 }
 
-button.submit
+.search button.submit
 {
   width: 175px;
   margin: auto;
@@ -84,17 +84,17 @@ button.submit
   outline: none;
 }
 
-::ng-deep .mat-card-header{
+::ng-deep .search .mat-card-header{
   display: block!important;
 }
 
-::ng-deep .carousel-cells .carousel-cell, ::ng-deep .carousel-cells {
+::ng-deep .search .carousel-cells .carousel-cell, ::ng-deep .carousel-cells {
   width: 100%!important;
 }
 
 @media screen and (max-width: 768px) {
-  form{
-    position:inherit;
+ .search form{
+    position:inherit!important;
     height: fit-content;
     padding-bottom: 50px;
   }
@@ -108,25 +108,25 @@ button.submit
   }
 }
 
-.carousel-container{
+.search .carousel-container{
   background: #282828;
 }
-::ng-deep .ngucarousel-items .item {
+::ng-deep .search .ngucarousel-items .item {
   align-items: center;
   display: flex;
   justify-content: space-around;
 }
 
-.tile img{
+.search .tile img{
   height: 100%;
   max-height: 500px;
   width: 100%;
 }
-.tile{
+.search .tile{
   width: 100%
 }
 
-.carousel-arrow{
+.search .carousel-arrow{
   margin-top: calc(-33% - 40px);
   position: relative;
   height: 80px;
@@ -137,12 +137,12 @@ button.submit
   align-items: center;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
-.rightRs{
+.search .rightRs{
   float: right;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-.leftRs{
+.search .leftRs{
   float: left;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

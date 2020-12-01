@@ -1,6 +1,11 @@
 ::ng-deep nav .mat-sidenav{
   width: 100%;
   max-width: 300px;
+  margin-top: 64px;
+}
+
+::ng-deep nav .mat-sidenav-content{
+  margin-top: 84px;
 }
 
 ::ng-deep nav a.mat-button:hover{
@@ -13,10 +18,12 @@
 
 ::ng-deep nav .mat-toolbar{
   display: flex;
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
+  position: fixed;
+  z-index: 100;
 }
 
 nav .logo img{
@@ -24,5 +31,5 @@ nav .logo img{
 }
 
 ::ng-deep nav .mat-toolbar.mat-primary {
-    background: #fff!important;
+  background: #fff!important;
 }

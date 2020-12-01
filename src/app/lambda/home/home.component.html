@@ -1,11 +1,3 @@
-<ng-container *ngFor="let home of homes">
-  <div class="">
-    {{ home.libelle }}
-    {{ home.type}}
-  </div>
-</ng-container>
-
-
 <div class="wrapper">
   <div class="search-container">
     <div class="background-effect">
@@ -14,12 +6,12 @@
           <h1> Atypik House</h1>
           <h2>Location de Logements Insolites</h2>
         </div>
-        <form [formGroup]="search" class="search" submit="console.log('ok')">
+        <form [formGroup]="search"  (ngSubmit)="searchHouse()">
           <mat-form-field appearance="fill" class="col-xl-4 col-md-4 col-sm-12" >
             <mat-label>Catégories</mat-label>
-            <mat-select multiple formControlName="category" required>
-              <mat-option *ngFor="let category of categories" [value]="category.value">
-                {{category.viewValue}}
+            <mat-select multiple formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -32,12 +24,11 @@
             [satDatepicker]="picker"
             (click)="picker.open()"
             (dateInput)="onDateChange($event.value)"
-            [value]="dates"
             formControlName="date">
             <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
             <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
           </mat-form-field>
-          <mat-form-field required appearance="fill" class="col-xl-4 col-md-4 col-sm-12">
+          <mat-form-field  appearance="fill" class="col-xl-4 col-md-4 col-sm-12">
             <mat-label>Departements</mat-label>
             <mat-select formControlName="Département" multiple formControlName="localisation" >
               <mat-option *ngFor="let dept of departements" [value]="dept.id">
@@ -168,8 +159,8 @@
         <h2>Les catégories de Logements Insolites</h2>
       </div>
       <div class="list-categories">
-        <a class="col-xl-3 col-sm-6 col-md-4" *ngFor="let category of categories" href = "search/{{category.value}}">
-          {{category.viewValue}}
+        <a class="col-xl-3 col-sm-6 col-md-4" *ngFor="let category of categories" [routerLink]="['/search']" [queryParams]="{category: category.id}">
+          {{category.name}}
         </a>
       </div>
     </div>

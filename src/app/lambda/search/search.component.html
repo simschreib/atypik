@@ -1,23 +1,17 @@
-<ng-container *ngFor="let home of homes">
-  <div class="">
-    {{ home.name }}
-    {{ home.type.name}}
-  </div>
-</ng-container>
-<div class="row">
+<div class="row search">
   <div class="search-tools col-xl-3 col-md-4 col-sm-12">
-    <form class="col-xl-3 col-md-4 col-sm-12" [formGroup]="search" class="search" submit="console.log('ok')">
+    <form class="col-xl-3 col-md-4 col-sm-12" [formGroup]="search" class="search" (ngSubmit)="log(search)">
       <mat-form-field appearance="fill" class="col-12">
         <mat-label>Catégories</mat-label>
         <mat-select multiple formControlName="category">
-          <mat-option *ngFor="let category of categories" [value]="category.value">
-            {{category.viewValue}}
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill" class="col-12">
         <mat-label>Caractéristiques</mat-label>
-        <mat-select multiple formControlName="category">
+        <mat-select multiple formControlName="feature">
           <mat-option *ngFor="let feature of features" [value]="feature.value">
             {{feature.viewValue}}
           </mat-option>
@@ -27,6 +21,15 @@
         <mat-label class="numberPeopleLabel">Nombre de personnes</mat-label>
         <input matInput type="number"  formControlName ="peopleNumber" (change) = checkThisNbPeople() min = "0" max ="20">
       </mat-form-field>
+      <mat-form-field  appearance="fill" class="col-xl-4 col-md-4 col-sm-12">
+        <mat-label>Departements</mat-label>
+        <mat-select formControlName="Département" multiple formControlName="localisation" >
+          <mat-option *ngFor="let dept of departements" [value]="dept.id">
+            {{dept.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Selectionner un département</mat-error>
+      </mat-form-field>
       <mat-form-field>
           <input matInput
           [min]="minDate"
@@ -35,7 +38,8 @@
           [satDatepicker]="picker"
           (click)="picker.open()"
           (dateInput)="onDateChange($event.value)"
-          [value]="dates">
+          [value]="dates"
+          formControlName="date">
           <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
           <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
         </mat-form-field>
