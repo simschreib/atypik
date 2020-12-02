@@ -78,7 +78,8 @@ export class HouseComponent implements OnInit {
     'Excursion Equestre',
     'Balade en vélo',
   ]
-
+  lat;
+  lng;
   constructor(
     private route: ActivatedRoute,
     private homeService: HomeService,
@@ -110,8 +111,7 @@ export class HouseComponent implements OnInit {
     this.maxDate = new Date(year + 1, month, day);
 
     var cookie = this.cookieParamService.currentCookieParamValue;
-    console.log(cookie);
-
+    
     if(cookie.begin && cookie.end){
       this.search.patchValue({
         date : {
@@ -139,7 +139,6 @@ export class HouseComponent implements OnInit {
     }
   }
   checkDate(date){
-    console.log(date);
     for(let i = 0; i < this.fakeResa.length; i++){
       if(date.getTime() >= this.fakeResa[i].begin.getTime() && date.getTime() < this.fakeResa[i].end.getTime()){
         return false;
@@ -147,6 +146,7 @@ export class HouseComponent implements OnInit {
     }
     return true;
   }
+  OnDateChange(){}
   ngOnInit() {
     window.scroll(0, 0);
   }

@@ -32,7 +32,6 @@
       [satDatepicker]="picker"
       [matDatepickerFilter] = "myDateFilter"
       (click)="picker.open()"
-      (dateInput)="onDateChange($event.value)"
       [value]="dates"
       formControlName ="date">
       <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>

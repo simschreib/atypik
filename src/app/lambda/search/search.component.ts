@@ -165,7 +165,6 @@ export class SearchComponent implements OnInit {
     this.stars = Array(5).fill(0).map((x,i)=>i+1);
 
     this.homeService.home().subscribe(homes => {this.homes = homes
-      console.log(this.homes);
     });
     this.title.setTitle('Atypique House - Logement Insolite - Recherche');
     this.meta.updateTag(
@@ -219,7 +218,6 @@ export class SearchComponent implements OnInit {
     const year = new Date().getFullYear();
     const day = new Date().getDate();
     const month = new Date().getMonth();
-    console.log(day)
     this.minDate = new Date(year, month, day + 1);
     this.maxDate = new Date(year + 1, month, day +  1);
   }
@@ -267,31 +265,23 @@ export class SearchComponent implements OnInit {
   }
 
   onDateChange(e){
-    console.log(e);
   }
   ngOnInit(): void {
     this.homeService.home().subscribe(
       data => {
         var tmp = data;
-        console.log(this.search)
         if(this.search.value.category){
-          console.log(tmp);
           tmp= tmp.filter(x => this.search.value.category.includes(x.type.id));
-          console.log(tmp);
         }
         if(this.search.value.peopleNumber){
-          console.log(tmp);
           tmp= tmp.filter(x => this.search.value.peopleNumber <= x.capacity);
-          console.log(this.search.value.peopleNumber);
         }
         if(this.search.value.localisation){
           tmp= tmp.filter(x => this.search.value.localisation.includes(x.postalCode));
-          console.log(tmp);
         }
         if(this.search.value.date && this.search.value.date.begin && this.search.value.date.end){
           tmp= tmp.filter(x => this.checkResa(this.search.value.date.begin, this.search.value.date.end));
         }
-        console.log(this.search.value);
         this.homes = JSON.parse(JSON.stringify(tmp));
         this.appendItems(0, this.sum);
       }
@@ -305,10 +295,6 @@ export class SearchComponent implements OnInit {
 
   }
   checkResa(begin, end ){
-    console.log(begin.getTime());
-    console.log(this.fakeResa[0].begin);
-    console.log(end.getTime());
-    console.log(this.fakeResa[0].end);
     for(let i = 0; i < this.fakeResa.length; i++){
       if(begin.getTime() >= this.fakeResa[i].begin.getTime() && begin.getTime() < this.fakeResa[i].end.getTime()){
         return false;
@@ -324,7 +310,6 @@ export class SearchComponent implements OnInit {
     console.log(msg);
   }
   searchHouse(){
-    console.log(this.search.value.date);
     if(!this.search.value.date || !this.search.value.date.begin || !this.search.value.date.end){
       this.search.patchValue({
         date : {
@@ -358,7 +343,7 @@ export class SearchComponent implements OnInit {
       if(this.search.value.date && this.search.value.date.end && this.search.value.date.begin){
         cookie.begin = this.search.value.date.begin;
         cookie.end = this.search.value.date.end;
-      }      
+      }
       this.cookieParamService.setCookieParam(cookie);
     }
   }
