@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CaracteristiqueService {
+export class CaracteristiquesService {
 
   constructor(
     private http: HttpClient,

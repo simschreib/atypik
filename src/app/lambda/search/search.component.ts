@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { Hebergement } from 'src/app/_models/hebergement';
-import { HomeService, CategoriesService, CaracteristiqueService } from 'src/app/_services';
+import { HomeService, CategoriesService, CaracteristiquesService, CookieParamService } from 'src/app/_services';
 import { Title, Meta } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -116,9 +116,20 @@ export class SearchComponent implements OnInit {
     {id : "975", name :   '976 - Mayotte'},
   ];
   homes: Hebergement[];
+  homes_displayed = [];
   minDate: Date;
   maxDate: Date;
-  dates;
+  dates
+  fakeResa = [
+    {
+      begin : new Date(2020, 11, 20),
+      end : new Date(2020, 11, 25),
+    },
+    {
+      begin : new Date(2020, 11, 10),
+      end : new Date(2020, 11, 16),
+    },
+  ];
   sum = 4;
   throttle = 10;
   scrollDistance = 1;
@@ -127,14 +138,8 @@ export class SearchComponent implements OnInit {
   modalOpen = false;
   item_per_page = 4;
   search: FormGroup;
+  stars
   categories;
-  features = [
-    {value: '0', viewValue: 'feature - 1'},
-    {value: '1', viewValue: 'feature - 2'},
-    {value: '2', viewValue: 'feature - 3'}
-  ]
-  data_hebergements = ['1','2','3','4','1','2','3','4','1','2','3','4'];
-  hebergements = [];
   carouselConfig: NguCarouselConfig = {
     grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
     load: 3,
@@ -150,13 +155,17 @@ export class SearchComponent implements OnInit {
   constructor(
     private homeService: HomeService,
     private categoriesService: CategoriesService,
-    private caracteristiquesService : CaracteristiqueService,
+    private caracteristiquesService : CaracteristiquesService,
+    private cookieParamService : CookieParamService,
     private route: ActivatedRoute,
+    private router: Router,
     private title: Title,
     private meta : Meta,
   ) {
+    this.stars = Array(5).fill(0).map((x,i)=>i+1);
+
     this.homeService.home().subscribe(homes => {this.homes = homes
-    console.log(this.homes);
+      console.log(this.homes);
     });
     this.title.setTitle('Atypique House - Logement Insolite - Recherche');
     this.meta.updateTag(
@@ -170,28 +179,42 @@ export class SearchComponent implements OnInit {
       peopleNumber : new FormControl(),
     });
     this.route.queryParams.subscribe(data => {
-      console.log(data);
       if(data.date_begin && data.date_end){
-        console.log('coucou date')
         this.search.patchValue({ date : {
           begin : new Date(data.date_begin),
           end : new Date(data.date_end),
         }})
-        console.log(this.search);
       }
-      if(data.category){
+      if(data.peopleNumber){
         this.search.patchValue({
-          category : data.category,
+          peopleNumber : parseInt(data.peopleNumber),
         })
       }
-      if(data.localisation){
-        this.search.patchValue({
-          localisation : data.localisation,
-        })
+      if(data.category ){
+        if(Array.isArray(data.category)) {
+          this.search.patchValue({
+            category : data.category,
+          })
+        }
+        else{
+          this.search.patchValue({
+            category : new Array(data.category),
+          })
+        }
       }
-      console.log(this.search);
+      if(data.localisation ){
+        if(Array.isArray(data.localisation)) {
+          this.search.patchValue({
+            localisation : data.localisation,
+          })
+        }
+        else{
+          this.search.patchValue({
+            localisation : new Array(data.localisation),
+          })
+        }
+      }
     });
-    this.appendItems(0, this.sum);
 
     const year = new Date().getFullYear();
     const day = new Date().getDate();
@@ -209,11 +232,15 @@ export class SearchComponent implements OnInit {
       this.search.patchValue({peopleNumber: 0});
     }
   }
-
   addItems(startIndex, endIndex, _method) {
-    if(this.sum <= this.data_hebergements.length){
+    if(this.sum <= this.homes.length){
       for (let i = startIndex; i < endIndex; ++i) {
-        this.hebergements[_method](this.data_hebergements[i]);
+        this.homes_displayed[_method](this.homes[i]);
+      }
+    }
+    else if(  this.homes_displayed.length < this.homes.length){
+      for (let i = 0; i < this.homes.length; ++i) {
+        this.homes_displayed[_method](this.homes[i]);
       }
     }
   }
@@ -245,7 +272,28 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.home().subscribe(
       data => {
-        this.homes = data
+        var tmp = data;
+        console.log(this.search)
+        if(this.search.value.category){
+          console.log(tmp);
+          tmp= tmp.filter(x => this.search.value.category.includes(x.type.id));
+          console.log(tmp);
+        }
+        if(this.search.value.peopleNumber){
+          console.log(tmp);
+          tmp= tmp.filter(x => this.search.value.peopleNumber <= x.capacity);
+          console.log(this.search.value.peopleNumber);
+        }
+        if(this.search.value.localisation){
+          tmp= tmp.filter(x => this.search.value.localisation.includes(x.postalCode));
+          console.log(tmp);
+        }
+        if(this.search.value.date && this.search.value.date.begin && this.search.value.date.end){
+          tmp= tmp.filter(x => this.checkResa(this.search.value.date.begin, this.search.value.date.end));
+        }
+        console.log(this.search.value);
+        this.homes = JSON.parse(JSON.stringify(tmp));
+        this.appendItems(0, this.sum);
       }
     );
     this.categoriesService.categories().subscribe(
@@ -253,8 +301,64 @@ export class SearchComponent implements OnInit {
         this.categories = data;
       }
     );
+
+
   }
+  checkResa(begin, end ){
+    console.log(begin.getTime());
+    console.log(this.fakeResa[0].begin);
+    console.log(end.getTime());
+    console.log(this.fakeResa[0].end);
+    for(let i = 0; i < this.fakeResa.length; i++){
+      if(begin.getTime() >= this.fakeResa[i].begin.getTime() && begin.getTime() < this.fakeResa[i].end.getTime()){
+        return false;
+      }
+      else if(end.getTime() >= this.fakeResa[i].begin.getTime() && end.getTime() < this.fakeResa[i].end.getTime()){
+        return false;
+      }
+    }
+    return true;
+  }
+
   log(msg){
     console.log(msg);
   }
-}
+  searchHouse(){
+    console.log(this.search.value.date);
+    if(!this.search.value.date || !this.search.value.date.begin || !this.search.value.date.end){
+      this.search.patchValue({
+        date : {
+          begin : undefined,
+          end : undefined
+        }})
+      }
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(
+        ()=>
+        this.router.navigate(['/search'], {
+          queryParams: {
+            category : this.search.value.category,
+            date_begin: this.search.value.date.begin,
+            date_end: this.search.value.date.end,
+            localisation : this.search.value.localisation,
+            peopleNumber : this.search.value.peopleNumber,
+          }
+        })
+      );
+
+    }
+    setCookie(){
+      var cookie = {
+        begin : null,
+        end : null,
+        peopleNumber : null
+      }
+      if(this.search.value.peopleNumber){
+        cookie.peopleNumber = this.search.value.peopleNumber;
+      }
+      if(this.search.value.date && this.search.value.date.end && this.search.value.date.begin){
+        cookie.begin = this.search.value.date.begin;
+        cookie.end = this.search.value.date.end;
+      }      
+      this.cookieParamService.setCookieParam(cookie);
+    }
+  }

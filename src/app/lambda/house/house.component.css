@@ -64,13 +64,17 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
-
+.title strong{
+  font-size: 1.75em;
+  font-family: 'Nunito', sans-serif;
+}
 @media screen and (max-width:635px) {
   h1{
     font-size: 2em;
   }
-  h2{
+  .title strong{
     font-size: 1.5em;
+    font-family: 'Nunito', sans-serif;
   }
 }
 
@@ -78,8 +82,9 @@
   h1{
     font-size: 1.5em;
   }
-  h2{
-    font-size: 1em;
+  .title strong{
+    font-size: 1.5em;
+    font-family: 'Nunito', sans-serif;
   }
 }
 
@@ -158,6 +163,6 @@ button.submit
 }
 
 ::ng-deep .carousel-container-img .ngucarousel {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

@@ -137,6 +137,8 @@ export class HomeComponent implements OnInit {
       category : new FormControl(),
       date: new FormControl(),
       localisation : new FormControl(),
+      peopleNumber : new FormControl(),
+
     });
     const year = new Date().getFullYear();
     const day = new Date().getDate();
@@ -148,7 +150,6 @@ export class HomeComponent implements OnInit {
 
   }
   searchHouse(){
-    console.log(this.search.value.date);
     if(!this.search.value.date || !this.search.value.date.begin || !this.search.value.date.end){
       this.search.patchValue({
         date : {
@@ -162,21 +163,29 @@ export class HomeComponent implements OnInit {
           date_begin: this.search.value.date.begin,
           date_end: this.search.value.date.end,
           localisation : this.search.value.localisation,
+          peopleNumber : this.search.value.peopleNumber,
         }
       })
+    }
+    checkThisNbPeople(){
+      var form = this.search.value
+      if(form.peopleNumber > 20){
+        this.search.patchValue({peopleNumber: 20});
+      }
+      else if(form.peopleNumber < 0){
+        this.search.patchValue({peopleNumber: 0});
+      }
     }
     ngOnInit(): void {
       this.homeService.home().subscribe(
         data => {
           this.homes = data;
-          console.log(data);
         }
       );
 
       this.categoriesService.categories().subscribe(
         data => {
           this.categories = data;
-          console.log(data);
         }
       );
     }

@@ -2,19 +2,24 @@
   <div class="row">
     <div class="col-lg-4 col-sm-12">
       <ul>
-        <li><a href="#">Proche de Paris</a></li>
-        <li><a href="#">Week end Insolite en Bretagne</a></li>
-        <li><a href="#">Week end Insolite en Auvergne-Rhône-Alpes</a></li>
-        <li><a href="#">Week end Insolite en Bourgogne-Franche-Comté</a></li>
-        <li><a href="#">Week end Insolite en Centre-Val de Loire</a></li>
-        <li><a href="#">Week end Insolite en Corse</a></li>
-        <li><a href="#">Week end Insolite dans le Grand Est</a></li>
-        <li><a href="#">Week end Insolite dans les Hauts-de-France</a></li>
-        <li><a href="#">Week end Insolite en Normandie</a></li>
-        <li><a href="#">Week end Insolite en Nouvelle-Aquitaine</a></li>
-        <li><a href="#">Week end Insolite en Occitanie</a></li>
-        <li><a href="#">Week end Insolite en Pays de la Loire</a></li>
-        <li><a href="#">Week end Insolite en Provence-Alpes-Côte d'Azur</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['91','92','93','94','95','75','77','78'] }">Proche de Paris</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['22','29','35','56'] }">Week end Insolite en Bretagne</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['1','3','7','15','26','38','42','43','63','69','73'] }">Week end Insolite en Auvergne-Rhône-Alpes</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['21','25','390,'58','70','71','89','90' ]}">Week end Insolite en Bourgogne-Franche-Comté</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['18','28','36','37','41','45'] }">Week end Insolite en Centre-Val de Loire</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['201','202'] }">Week end Insolite en Corse</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['8','10','51','52','55','57','67','68','88'] }">Week end Insolite dans le Grand Est</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['2','59','60','62','80'] }">Week end Insolite dans les Hauts-de-France</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['14','27','50','61','76'] }">Week end Insolite en Normandie</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['16','17','19','23','24','33','40','47','64','79','86','87'] }">Week end Insolite en Nouvelle-Aquitaine</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['9','11','12','30','31','32','34','46','48','65','66','81','82'] }">Week end Insolite en Occitanie</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['44','49','53','72','85'] }">Week end Insolite en Pays de la Loire</a></li>
+        <li><a [routerLink]="['/search']" [queryParams]="{localisation : ['4','5','6','13','83','84'] }">Week end Insolite en Provence-Alpes-Côte d'Azur</a></li>
+      </ul>
+    </div>
+    <div class="col-lg-4 col-sm-12">
+      <ul>
+        <li *ngFor ="let category of categories"><a [routerLink]="['/search']" [queryParams]="{ category : category.id }">{{category.name}}</a></li>
       </ul>
     </div>
     <div class="col-lg-4 col-sm-12">
@@ -22,10 +27,6 @@
         <li><a routerLink="/">Accueil</a></li>
         <li><a routerLink="/register">S'incrire</a></li>
         <li><a href="#">S'inscrire à la Newsletter</a></li>
-      </ul>
-    </div>
-    <div class="col-lg-4 col-sm-12">
-      <ul>
         <li><a routerLink="/cgu">CGU/CGV</a></li>
       </ul>
     </div>

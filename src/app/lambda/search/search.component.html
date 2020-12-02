@@ -1,19 +1,11 @@
 <div class="row search">
   <div class="search-tools col-xl-3 col-md-4 col-sm-12">
-    <form class="col-xl-3 col-md-4 col-sm-12" [formGroup]="search" class="search" (ngSubmit)="log(search)">
+    <form class="col-xl-3 col-md-4 col-sm-12" [formGroup]="search" class="search" (ngSubmit)="searchHouse()">
       <mat-form-field appearance="fill" class="col-12">
         <mat-label>Catégories</mat-label>
         <mat-select multiple formControlName="category">
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{category.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Caractéristiques</mat-label>
-        <mat-select multiple formControlName="feature">
-          <mat-option *ngFor="let feature of features" [value]="feature.value">
-            {{feature.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -31,18 +23,18 @@
         <mat-error>Selectionner un département</mat-error>
       </mat-form-field>
       <mat-form-field>
-          <input matInput
-          [min]="minDate"
-          [max]="maxDate"
-          placeholder="Sélectionnez les Dates"
-          [satDatepicker]="picker"
-          (click)="picker.open()"
-          (dateInput)="onDateChange($event.value)"
-          [value]="dates"
-          formControlName="date">
-          <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
-          <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-        </mat-form-field>
+        <input matInput
+        [min]="minDate"
+        [max]="maxDate"
+        placeholder="Sélectionnez les Dates"
+        [satDatepicker]="picker"
+        (click)="picker.open()"
+        (dateInput)="onDateChange($event.value)"
+        [value]="dates"
+        formControlName="date">
+        <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+        <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+      </mat-form-field>
       <div class="col-12">
         <button  type="submit" name="button" class="submit" >
           <mat-icon>search</mat-icon>
@@ -60,21 +52,19 @@
     (scrolled)="onScrollDown()"
     (scrolledUp)="onUp()">
 
-    <mat-card class="col-xl-5 col-md-11 col-sm-12" *ngFor="let hebergement of homes">
+    <mat-card class="col-xl-5 col-md-11 col-sm-12" *ngFor="let hebergement of homes_displayed">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{hebergement.name}} ID = {{hebergement.id}}</mat-card-title>
+        <mat-card-title>{{hebergement.name}}</mat-card-title>
         <mat-card-subtitle>{{hebergement.price}}€/nuit</mat-card-subtitle>
       </mat-card-header>
       <div class="carousel-container">
-
         <ngu-carousel #myCarousel [inputs]="carouselConfig" [dataSource]="carouselItems">
           <div *nguCarouselDef="let item;" class="item">
             <div class="tile">
               <img src="./assets/img/{{item}}" alt="{{item}}">
             </div>
           </div>
-
           <button NguCarouselNext class="rightRs carousel-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
           <button NguCarouselPrev class="leftRs carousel-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </ngu-carousel>
@@ -83,15 +73,18 @@
 
       </mat-card-content>
       <div class="rate-container">
-        <mat-icon class="rate"> grade</mat-icon>
-        <mat-icon class="rate"> grade</mat-icon>
-        <mat-icon class="rate"> grade</mat-icon>
-        <mat-icon class="rate"> grade</mat-icon>
-        <mat-icon class="rate" fontSet="material-icons-outlined"> grade</mat-icon>
+        <ng-container *ngFor ="let star of stars" >
+          <ng-container *ngIf ="hebergement.notation >= star">
+            <mat-icon class="rate"> grade</mat-icon>
+          </ng-container>
+          <ng-container *ngIf ="hebergement.notation < star">
+            <mat-icon class="rate" fontSet="material-icons-outlined"> grade</mat-icon>
+          </ng-container>
+        </ng-container>
       </div>
       <mat-card-actions>
-        <a class="details" [routerLink]="['/house', hebergement.id]">Détails</a>
-        <!-- <a class="details" [routerLink]="['/house']" [queryParams]="{ hebergement: hebergement}">Détails</a> -->
+        <a class="details" [routerLink]="['/house', hebergement.id]" (click) = "setCookie()">Détails</a>
+        <!-- <a class="details" [routerLink]="['/house']" >Détails</a> -->
       </mat-card-actions>
     </mat-card>
   </div>
