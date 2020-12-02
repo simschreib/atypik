@@ -1,0 +1,1 @@
+Sitemap: https://atypik-house-demo.herokuapp.com/sitemap.xml
